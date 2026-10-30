@@ -14,10 +14,10 @@
 
 | Agent / strategy | Correct / completed | Accuracy |
 |---|---:|---:|
-| 1 Step-by-step solver | 14/16 | 87.50% |
-| 2 Alternative solver | 14/16 | 87.50% |
-| 3 Critical reasoner | 15/16 | 93.75% |
-| 4 Independent verifier | 14/16 | 87.50% |
+| 1- Step-by-step solver | 14/16 | 87.50% |
+| 2- Alternative solver | 14/16 | 87.50% |
+| 3- Critical reasoner | 15/16 | 93.75% |
+| 4- Independent verifier | 14/16 | 87.50% |
 | **System plurality vote** | **14/16** | **87.50%** |
 
 The project calls this majority voting, but it selects the most frequent parsed option (plurality); ties use alphabetical order A < B < C < D < E. Invalid choices abstain; no reference is consulted. All 64 responses in completed questions parsed successfully. There were two 2–2 ties: validation:126, A vs D → A (label match), and validation:68, C vs D → C (label mismatch). One tie was correct and one incorrect; tie behavior affects the score.
