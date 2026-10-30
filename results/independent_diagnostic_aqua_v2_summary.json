@@ -1,0 +1,54 @@
+{
+  "planned_questions": 20,
+  "recorded_questions": 20,
+  "complete_four_response_questions": 16,
+  "four_parsed_answer_questions": 16,
+  "individual_agents": [
+    {
+      "agent_id": 0,
+      "correct": 14,
+      "planned": 20,
+      "returned": 17,
+      "planned_accuracy": 0.7,
+      "returned_accuracy": 0.8235294117647058
+    },
+    {
+      "agent_id": 1,
+      "correct": 14,
+      "planned": 20,
+      "returned": 16,
+      "planned_accuracy": 0.7,
+      "returned_accuracy": 0.875
+    },
+    {
+      "agent_id": 2,
+      "correct": 15,
+      "planned": 20,
+      "returned": 16,
+      "planned_accuracy": 0.75,
+      "returned_accuracy": 0.9375
+    },
+    {
+      "agent_id": 3,
+      "correct": 14,
+      "planned": 20,
+      "returned": 16,
+      "planned_accuracy": 0.7,
+      "returned_accuracy": 0.875
+    }
+  ],
+  "majority_correct": 14,
+  "majority_accuracy_planned": 0.7,
+  "unanimous_count": 13,
+  "unanimous_rate_planned": 0.65,
+  "disagreement_count": 3,
+  "disagreement_rate_planned": 0.15,
+  "missing_or_unparseable_count": 4,
+  "items_with_observed_incorrect_agent": [
+    "aqua_rat:33301c6a050c96af81f63cad5562cb5363e88971:validation:126",
+    "aqua_rat:33301c6a050c96af81f63cad5562cb5363e88971:validation:71",
+    "aqua_rat:33301c6a050c96af81f63cad5562cb5363e88971:validation:68",
+    "aqua_rat:33301c6a050c96af81f63cad5562cb5363e88971:validation:146"
+  ],
+  "notes": "Planned denominators retain failures/unavailable slots; returned accuracy is also exposed. Unanimity/disagreement require four parsed answers; missing answers form a third category."
+}

@@ -1,0 +1,12 @@
+openai>=1.66,<3
+networkx>=3.2,<4
+torch>=2.2,<3
+datasets>=3,<5
+numpy>=1.26,<3
+pandas>=2.2,<4
+scikit-learn>=1.4,<2
+python-dotenv>=1,<2
+PyYAML>=6,<7
+pytest>=8,<10
+tiktoken>=0.9,<1
+google-genai>=2.33,<3

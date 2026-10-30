@@ -1,0 +1,40 @@
+# Opt-in only. Preparing this experiment never constructs a Gemini client.
+backend: gemini
+model: gemini-3.5-flash-lite
+benchmark: aqua_rat
+split: validation
+limit: 20
+seed: 42
+agents: 4
+rounds: 1
+topology: empty
+roles_config: configs/diverse_roles.yaml
+max_output_tokens: 1024
+temperature: null
+timeout: 60
+max_retries: 0
+gemini_thinking_budget: null
+gemini_thinking_level: minimal
+gemini_free_tier_confirmed: false  # Fresh approval receipt is required before any live call.
+gemini_rate_limits: {rpm: 12, tpm: 200000, rpd: 80}
+minimum_request_spacing_seconds: 5.1
+daily_quota_reserve: 20
+datasets:
+  aqua_rat:
+    dataset: deepmind/aqua_rat
+    configuration: raw
+    revision: 33301c6a050c96af81f63cad5562cb5363e88971
+  gsm8k:
+    dataset: openai/gsm8k
+    configuration: main
+    revision: 740312add88f781978c0658806c59bc2815b9866
+    validation_fraction: 0.2
+# Predeclared proxy: words + 8*numeric quantities + 6*relation terms.
+# No labels, rationales, model errors or topology performance are selection inputs.
+difficulty_selection:
+  mode: question_complexity
+  version: 1
+  min_words: 30
+  min_numbers: 3
+  min_relations: 1
+output_prefix: results/independent_diagnostic_aqua

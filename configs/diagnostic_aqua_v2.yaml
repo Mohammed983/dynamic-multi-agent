@@ -1,0 +1,45 @@
+# Revised protocol; no inference until a new plan-bound approval.
+backend: gemini
+model: gemini-3.5-flash-lite
+benchmark: aqua_rat
+split: validation
+limit: 20
+seed: 42
+agents: 4
+rounds: 1
+topology: empty
+roles_config: configs/diverse_roles.yaml
+max_output_tokens: 2048
+temperature: null
+timeout: 60
+max_retries: 0
+gemini_thinking_budget: null
+gemini_thinking_level: minimal
+gemini_free_tier_confirmed: false
+gemini_rate_limits:
+  rpm: 12
+  tpm: 200000
+  rpd: 80
+minimum_request_spacing_seconds: 5.1
+daily_quota_reserve: 20
+datasets:
+  aqua_rat:
+    dataset: deepmind/aqua_rat
+    configuration: raw
+    revision: 33301c6a050c96af81f63cad5562cb5363e88971
+  gsm8k:
+    dataset: openai/gsm8k
+    configuration: main
+    revision: 740312add88f781978c0658806c59bc2815b9866
+    validation_fraction: 0.2
+difficulty_selection:
+  mode: question_complexity
+  version: 1
+  min_words: 30
+  min_numbers: 3
+  min_relations: 1
+output_prefix: results/independent_diagnostic_aqua_v2
+experiment_version: 2
+prompt_style: concise_option_v2
+frozen_source_plan: results/independent_diagnostic_aqua_plan.json
+model_metadata_source: results/independent_diagnostic_aqua_state.json

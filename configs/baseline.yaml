@@ -1,0 +1,30 @@
+backend: mock
+model: null
+agents: 4
+rounds: 2
+topology: fully_connected
+seed: 42
+max_output_tokens: 512
+temperature: null
+timeout: 60
+max_retries: 2
+# Gemini only: confirm Free tier AND billing disabled in AI Studio, then record
+# this project's current model-specific limits. Never infer these from a key.
+gemini_free_tier_confirmed: false
+gemini_rate_limits: {rpm: null, tpm: null, rpd: null}
+gemini_thinking_budget: 0
+allow_self_loops: false
+sparse_edges: [[0, 1], [1, 2], [2, 3]]
+heuristic_threshold: 0.35
+heuristic_disagreement_weight: 0.6
+heuristic_consensus_weight: 0.2
+heuristic_novelty_weight: 0.2
+mlp_threshold: 0.5
+top_k: null
+mlp_checkpoint: null
+benchmark: demo
+split: validation
+limit: 40
+validation_fraction: 0.2
+dataset_revision: main
+output: results/baseline.jsonl

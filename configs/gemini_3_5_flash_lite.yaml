@@ -1,0 +1,32 @@
+backend: gemini
+model: gemini-3.5-flash-lite
+agents: 4
+rounds: 2
+topology: fully_connected
+seed: 42
+max_output_tokens: 512
+temperature: null
+timeout: 60
+max_retries: 0
+# Gemini 3 uses a named level; never send the 2.5 numeric budget to this model.
+gemini_thinking_budget: null
+gemini_thinking_level: minimal
+# User confirmed in chat: Free tier, billing disabled. Recheck if the key/project changes.
+gemini_free_tier_confirmed: true
+# User-provided active AI Studio limits for this model/project.
+gemini_rate_limits: {rpm: 15, tpm: 250000, rpd: 500}
+allow_self_loops: false
+sparse_edges: [[0, 1], [1, 2], [2, 3]]
+heuristic_threshold: 0.35
+heuristic_disagreement_weight: 0.6
+heuristic_consensus_weight: 0.2
+heuristic_novelty_weight: 0.2
+mlp_threshold: 0.5
+top_k: null
+mlp_checkpoint: null
+benchmark: demo
+split: validation
+limit: 40
+validation_fraction: 0.2
+dataset_revision: main
+output: results/gemini_3_5_baseline.jsonl

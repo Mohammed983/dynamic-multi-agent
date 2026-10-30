@@ -1,0 +1,77 @@
+{
+  "created_at": "2026-10-28T23:42:27.564625+00:00",
+  "status": "awaiting_budget_approval",
+  "model": "gpt-5-mini",
+  "agents": 4,
+  "rounds": 3,
+  "topologies": [
+    "fully_connected",
+    "ring"
+  ],
+  "split": "validation",
+  "partition_seed": 42,
+  "validation_fraction": 0.2,
+  "settings": {
+    "reasoning": {
+      "effort": "low"
+    },
+    "max_output_tokens": 2048,
+    "temperature": null,
+    "store": false,
+    "max_retries": 0,
+    "timeout_seconds": 90,
+    "service_tier": "default"
+  },
+  "generation_calls_made": 0,
+  "source_sha256": "7663262c628e96dc3bfc05767669eab3cd426c62494c9afc1ad8d6651a41fa7e",
+  "dataset": {
+    "name": "openai/gsm8k",
+    "config": "main",
+    "revision": "740312add88f781978c0658806c59bc2815b9866",
+    "question_count": 10,
+    "verified_unique": true
+  },
+  "question_file_sha256": "355432f4ece753da1d6db1c9a93013e7777d58e81be1947c4bd19e486d15aafe",
+  "reference_file_sha256": "9a08f29526b8367fd923d2b161f3376bf6f9199d88eb977aff313a198c28ef1b",
+  "cost": {
+    "assumed_visible_tokens_per_response": 200,
+    "assumed_total_output_tokens_per_call_range": [
+      400,
+      1000
+    ],
+    "estimated_input_tokens": 126864,
+    "estimated_cost_usd_range": [
+      0.223716,
+      0.511716
+    ],
+    "max_calls": 240,
+    "max_output_tokens_per_call": 2048,
+    "max_input_token_reservation_per_call": 12000,
+    "capped_scenario_usd": 1.7030399999999999,
+    "proposed_budget_usd": 2.0,
+    "input_usd_per_million": 0.25,
+    "cached_input_usd_per_million": 0.025,
+    "output_usd_per_million": 2.0,
+    "pricing_source": "https://developers.openai.com/api/docs/models/gpt-5-mini",
+    "tokenizer": "o200k_base",
+    "notes": "Forecast, not observed usage. No cache discount assumed. Reasoning tokens are output."
+  },
+  "api_preflight": {
+    "status": "passed",
+    "method": "GET /v1/models/gpt-5-mini",
+    "returned_model_id": "gpt-5-mini",
+    "generation_performed": false
+  },
+  "versions": {
+    "openai": "2.33.0",
+    "datasets": "4.8.5",
+    "tiktoken": "0.14.0",
+    "networkx": "3.6.1",
+    "numpy": "2.5.4"
+  },
+  "local_checks": {
+    "pytest": "72 passed, 1 deselected in 7.50s",
+    "training_test_deselected": true,
+    "compilation_passed": true
+  }
+}

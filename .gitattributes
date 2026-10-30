@@ -1,0 +1,7 @@
+# Preserve experiment/source fingerprints across core.autocrlf settings.
+# Do not normalize bytes covered by stored SHA-256 provenance checks.
+/src/** -text
+/experiments/** -text
+/configs/** -text
+/data/** -text
+/results/** -text

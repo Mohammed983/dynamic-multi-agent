@@ -1,0 +1,12 @@
+{
+  "real_trace_integrity_checks_passed": true,
+  "prior_artifact_hashes_preserved": true,
+  "openai_backend_unchanged": true,
+  "report_regeneration_idempotent": true,
+  "credential_scan_passed": true,
+  "report_sha256": "132fa0ce2a7b539dce36033e6d8755c7e1dae42bfb3f65c780f3ca78b6ca8b92",
+  "final_jsonl_sha256": "643abd65c3173fb3f5b55d1b4972b1e48e59cab11c11f4d0368a35058b280810",
+  "call_journal_sha256": "1f2b145fb171e39f9d1930ff8cdf30c0ca7e2c8e9d6a9756e6540be065d1c65a",
+  "api_calls_during_finalization": 0,
+  "mlp_trained": false
+}

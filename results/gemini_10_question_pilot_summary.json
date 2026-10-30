@@ -1,0 +1,48 @@
+{
+  "status": "completed",
+  "model": "gemini-3.5-flash-lite",
+  "topologies": {
+    "fully_connected": {
+      "completed_questions": 10,
+      "correct_questions": 10,
+      "initial_majority_correct_questions": 10,
+      "accuracy": 1.0,
+      "successful_input_tokens": 75200,
+      "successful_output_tokens": 22498,
+      "thinking_tokens": 0,
+      "successful_inference_seconds": 179.1180798000005,
+      "failed_request_seconds": 59.37753299999986,
+      "all_attempt_usage_complete": false,
+      "mean_successful_inference_seconds_per_question": 17.91180798000005,
+      "mean_active_wall_seconds_per_question": 68.82173752999988,
+      "message_deliveries": 240
+    },
+    "ring": {
+      "completed_questions": 10,
+      "correct_questions": 10,
+      "initial_majority_correct_questions": 10,
+      "accuracy": 1.0,
+      "successful_input_tokens": 44002,
+      "successful_output_tokens": 22175,
+      "thinking_tokens": 0,
+      "successful_inference_seconds": 214.98411880000367,
+      "failed_request_seconds": 0,
+      "all_attempt_usage_complete": true,
+      "mean_successful_inference_seconds_per_question": 21.49841188000037,
+      "mean_active_wall_seconds_per_question": 66.13110913,
+      "message_deliveries": 80
+    }
+  },
+  "attempts": 241,
+  "successful_responses": 240,
+  "failed_attempts": 1,
+  "unknown_usage_attempts": 1,
+  "agent_answer_transitions": 160,
+  "agent_answer_changes": [],
+  "visible_text_changes": 150,
+  "prior_artifacts_preserved": true,
+  "quota_remaining_after_own_calls_estimate": 258,
+  "quota_estimate_caveat": "Assumes no other project traffic; not a provider dashboard reading.",
+  "peak_requests_in_rolling_minute": 12,
+  "peak_known_input_tokens_in_rolling_minute": 10840
+}

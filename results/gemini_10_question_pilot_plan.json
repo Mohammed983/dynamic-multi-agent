@@ -1,0 +1,104 @@
+{
+  "status": "prepared_awaiting_execution",
+  "run_id": "7da68518-4971-4f48-8612-aa3081127749",
+  "created_at": "2026-10-29T00:29:51.309773+00:00",
+  "config": {
+    "backend": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "agents": 4,
+    "rounds": 3,
+    "topology": "fully_connected",
+    "seed": 42,
+    "max_output_tokens": 512,
+    "temperature": null,
+    "timeout": 60,
+    "max_retries": 0,
+    "gemini_thinking_budget": null,
+    "gemini_thinking_level": "minimal",
+    "gemini_free_tier_confirmed": true,
+    "gemini_rate_limits": {
+      "rpm": 12,
+      "tpm": 200000,
+      "rpd": 240
+    },
+    "allow_self_loops": false,
+    "sparse_edges": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ]
+    ],
+    "heuristic_threshold": 0.35,
+    "heuristic_disagreement_weight": 0.6,
+    "heuristic_consensus_weight": 0.2,
+    "heuristic_novelty_weight": 0.2,
+    "mlp_threshold": 0.5,
+    "top_k": null,
+    "mlp_checkpoint": null,
+    "benchmark": "gsm8k",
+    "split": "validation",
+    "limit": 10,
+    "validation_fraction": 0.2,
+    "dataset_revision": "main",
+    "output": "results/gemini_3_5_baseline.jsonl"
+  },
+  "dataset_revision": "740312add88f781978c0658806c59bc2815b9866",
+  "question_sha256": "355432f4ece753da1d6db1c9a93013e7777d58e81be1947c4bd19e486d15aafe",
+  "reference_sha256": "9a08f29526b8367fd923d2b161f3376bf6f9199d88eb977aff313a198c28ef1b",
+  "source_sha256": "37a05472455ddbf2aed9fcd948ba9cf90bfceabb9c149cc7ebebb8b1777a6435",
+  "profile_sha256": "69ac8facfd810d76c923fd6443814cecced078d1f1b59a08b15dbfda25c9d8bd",
+  "max_generation_calls": 240,
+  "minimum_request_spacing_seconds": 5.1,
+  "daily_reserve": 20,
+  "preserved_artifact_sha256": {
+    "results\\.gitkeep": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "results\\demo_report.md": "4eac5d917fa9182df8613544ddca0e4a124f9a9aeae7076a2500df67238b3f30",
+    "results\\environment.txt": "84725711033918947f50b897dca3b1c7147cf522281b24ed9a59d6bd00fffc37",
+    "results\\gemini_3_5_flash_lite_smoke.md": "922eb4777ee291b7b39c580f42350ac5468c53a5844e3c89d86bfdfd701cbac9",
+    "results\\gemini_3_5_metadata.json": "f1e248d97cef6305d41f7302670e48909cf7e35038431f9240ded0a7fa737862",
+    "results\\gemini_smoke.jsonl": "1d0e54e70024cb2b91b6ddd92aaff37d54730ccc5a417aaf544fc38a5cc13736",
+    "results\\gemini_support.md": "8b0f9710afd6fb1e45de626d10731dd9873ff64f167a359d968a2ceccabab516",
+    "results\\implementation_audit.md": "e8efbdc649088c1d07645dd9508583833844af60760529855647738faed13319",
+    "results\\mock_dynamic.jsonl": "21f483e2aa1941486651787178ae5e6c32def3e9f24031204315d478bb1f1105",
+    "results\\mock_dynamic_console.json": "44c4c606b35768164265f5a5ff70f020079df08618c516c96284c2c5c716e7e0",
+    "results\\mock_full.jsonl": "0c72d477ad0c5bf704b0dd3259518b1394956120dd5c9880caf968ed8ff836b2",
+    "results\\mock_full_console.json": "2f5a415f73eedd672ceeb8459f26ea8f8a0844a5512d9652542c6ec20f57ad0d",
+    "results\\mock_ring.jsonl": "6876b8e7d503d2073203050125121ab7265a64569c4c8490c36ee524545a83ae",
+    "results\\mock_ring_console.json": "b5c28dd76c8b0d464a1bbf63c1012e56ec579a4361b1c52c6ee5d3c75c8692aa",
+    "results\\pilot_approval.json": "34a99f41fcb7f653f8d8700a0a65dfa31ce34b3ed8e066ff7c170b591a5f58c4",
+    "results\\real_llm_pilot.md": "8f259400429a2d7bb490e70ec9880bb2deb86ded69deb998038c56a827fe9199",
+    "results\\real_pilot.jsonl": "2e24b391add2a8f4e630c1684bf508bd800d2e4d7630636488cc090480330d8e",
+    "results\\real_pilot_calls.jsonl": "64907564f57db40af900384b87291cc563b40c506d7fed81c23c3cb03a62b853",
+    "results\\real_pilot_execution.json": "fdabf66aea2cea492f23e0ce122faaf678f6fb28e181b510a8844a4e20de7a43",
+    "results\\real_pilot_plan.json": "0c47b35cb6be6a960ab649147f52edf2efac5853555bce3dcb21bd762dbda156",
+    "results\\real_pilot_references.jsonl": "9a08f29526b8367fd923d2b161f3376bf6f9199d88eb977aff313a198c28ef1b",
+    "results\\real_pilot_report_metadata.json": "e8a04f9d22aa6deda9052e62e589c582e1c60f76bc7507164c9afb1bfc9ad010",
+    "results\\verification.md": "1d372f83d997d3f16bafe84d74e74c70debcf0fe1d69b0cde462086ae96a8fa2"
+  },
+  "item_ids": [
+    "gsm8k:train:3082",
+    "gsm8k:train:2184",
+    "gsm8k:train:5897",
+    "gsm8k:train:2437",
+    "gsm8k:train:6330",
+    "gsm8k:train:819",
+    "gsm8k:train:3812",
+    "gsm8k:train:5878",
+    "gsm8k:train:5302",
+    "gsm8k:train:5876"
+  ],
+  "versions": {
+    "google-genai": "2.33.0",
+    "networkx": "3.6.1",
+    "numpy": "2.5.4",
+    "datasets": "4.8.5"
+  }
+}

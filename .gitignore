@@ -1,0 +1,84 @@
+.env
+.env.*
+!.env.example
+# Local credential material and operator access receipts (never public fixtures).
+credentials*.json
+client_secret*.json
+service-account*.json
+*service_account*.json
+*.pem
+*.key
+*.p12
+*.pfx
+*_approval.json
+*_approval_*.json
+*_access.json
+.venv/
+__pycache__/
+.pytest_cache/
+.pytest_tmp/
+*.pyc
+data/*
+!data/.gitkeep
+!data/pilot_questions.jsonl
+# Results are private/local by default. Publish only reviewed evidence below.
+# Approval receipts, API journals, states, archives and future runs stay ignored.
+/results/*
+!/results/.gitkeep
+!/results/aqua_v2_midterm.json
+!/results/aqua_v2_midterm.md
+!/results/gemini_10_question_pilot.jsonl
+!/results/gemini_10_question_pilot.md
+!/results/gemini_10_question_pilot_final.jsonl
+!/results/gemini_10_question_pilot_plan.json
+!/results/gemini_10_question_pilot_summary.json
+!/results/gemini_10_question_pilot_validation.json
+!/results/independent_diagnostic_aqua_plan.json
+!/results/independent_diagnostic_aqua_questions.jsonl
+!/results/independent_diagnostic_aqua_references.jsonl
+!/results/independent_diagnostic_aqua_results.jsonl
+!/results/independent_diagnostic_aqua_v2_questions.jsonl
+!/results/independent_diagnostic_aqua_v2_references.jsonl
+!/results/independent_diagnostic_aqua_v2_results.jsonl
+!/results/independent_diagnostic_aqua_v2_summary.json
+!/results/real_pilot_plan.json
+!/results/real_pilot_references.jsonl
+*.pt
+# Python environments
+env/
+venv/
+
+# Python caches
+*.pyo
+
+# Experiment outputs
+experiments/outputs/
+*.log
+
+# Model checkpoints
+*.pth
+*.ckpt
+
+# Editor files
+.vscode/
+.idea/
+*.code-workspace
+
+# Regenerable analysis/test/build caches and OS metadata.
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+build/
+dist/
+*.egg-info/
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+*~
+
+/docs/cleanup_plan.md
+/docs/cleanup_verification.md
+/docs/staging_review.md

@@ -1,0 +1,19 @@
+- name: Step-by-step solver
+  instruction: >-
+    Work independently and solve systematically. Explain the intermediate calculations
+    and check arithmetic and units before choosing your final answer.
+- name: Alternative solver
+  instruction: >-
+    Work independently and seek a different mathematical representation or approach,
+    such as equations, working backward, or a useful estimate. Do not merely repeat
+    an obvious calculation; justify your chosen method and final answer.
+- name: Critical reasoner
+  instruction: >-
+    Independently derive a solution while examining assumptions, potential traps,
+    ambiguous quantities, units, and common reasoning errors. Test your interpretation
+    and check the resulting answer rather than only criticizing a proposed solution.
+- name: Independent verifier
+  instruction: >-
+    Derive an answer independently. Where possible, verify it with a different method,
+    substitution, a reverse calculation, or a consistency check. Explain any discrepancy
+    before committing to a final answer.

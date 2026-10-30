@@ -1,0 +1,88 @@
+{
+  "status": "awaiting_explicit_approval",
+  "run_id": "8c7593cd-8c73-4c99-b5e9-acdfc0bbc835",
+  "created_at": "2026-10-29T01:46:23.076041+00:00",
+  "config": {
+    "backend": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "benchmark": "aqua_rat",
+    "split": "validation",
+    "limit": 20,
+    "seed": 42,
+    "agents": 4,
+    "rounds": 1,
+    "topology": "empty",
+    "roles_config": "configs/diverse_roles.yaml",
+    "max_output_tokens": 1024,
+    "temperature": null,
+    "timeout": 60,
+    "max_retries": 0,
+    "gemini_thinking_budget": null,
+    "gemini_thinking_level": "minimal",
+    "gemini_free_tier_confirmed": false,
+    "gemini_rate_limits": {
+      "rpm": 12,
+      "tpm": 200000,
+      "rpd": 80
+    },
+    "minimum_request_spacing_seconds": 5.1,
+    "daily_quota_reserve": 20,
+    "datasets": {
+      "aqua_rat": {
+        "dataset": "deepmind/aqua_rat",
+        "configuration": "raw",
+        "revision": "33301c6a050c96af81f63cad5562cb5363e88971"
+      },
+      "gsm8k": {
+        "dataset": "openai/gsm8k",
+        "configuration": "main",
+        "revision": "740312add88f781978c0658806c59bc2815b9866",
+        "validation_fraction": 0.2
+      }
+    },
+    "difficulty_selection": {
+      "mode": "question_complexity",
+      "version": 1,
+      "min_words": 30,
+      "min_numbers": 3,
+      "min_relations": 1
+    },
+    "output_prefix": "results/independent_diagnostic_aqua"
+  },
+  "config_sha256": "c0d177c87a43f75dd3d807e090303167a24162b2e01848f83bb037db3ebbd127",
+  "source_sha256": "353d56a72f038073aa81e22628e87e73a8735a64a404b825b8d64395cdc0125a",
+  "roles": [
+    {
+      "name": "Step-by-step solver",
+      "instruction": "Work independently and solve systematically. Explain the intermediate calculations and check arithmetic and units before choosing your final answer."
+    },
+    {
+      "name": "Alternative solver",
+      "instruction": "Work independently and seek a different mathematical representation or approach, such as equations, working backward, or a useful estimate. Do not merely repeat an obvious calculation; justify your chosen method and final answer."
+    },
+    {
+      "name": "Critical reasoner",
+      "instruction": "Independently derive a solution while examining assumptions, potential traps, ambiguous quantities, units, and common reasoning errors. Test your interpretation and check the resulting answer rather than only criticizing a proposed solution."
+    },
+    {
+      "name": "Independent verifier",
+      "instruction": "Derive an answer independently. Where possible, verify it with a different method, substitution, a reverse calculation, or a consistency check. Explain any discrepancy before committing to a final answer."
+    }
+  ],
+  "roles_sha256": "da3e65947d425d4f7d33333a67ed456b26f1bcebce1bc011a31e49112dcfe9db",
+  "question_file_sha256": "93fabca70d77742647d0c473e204e7ae8bca098499ffd334353b3422dd7c716a",
+  "reference_file_sha256": "f66178fa0a97f8d20545fb7fc19cf65b58b87fe83ee9d207999582963d305207",
+  "answer_format": "option",
+  "request_estimate": 80,
+  "generation_calls_issued": 0,
+  "selection_method": "Predeclared question-text characteristics only; no rationale, label or model outcomes.",
+  "difficulty_caveat": "Complexity proxy, not proven model difficulty. No claim that the ceiling effect is resolved.",
+  "versions": {
+    "google-genai": "2.33.0",
+    "datasets": "4.8.5",
+    "numpy": "2.5.4",
+    "networkx": "3.6.1"
+  },
+  "preapproval_source_sha256": "f19fe991bbddbac505f1a7c3a4e44518c90e2f82c350f0bc6bc5b95c0726b8be",
+  "preapproval_source_update_reason": "Finalize option-aware journal parsing; protocol and frozen data unchanged; no inference issued."
+}

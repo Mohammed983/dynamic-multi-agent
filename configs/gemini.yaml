@@ -1,0 +1,30 @@
+backend: gemini
+model: null  # GEMINI_MODEL or gemini-2.5-flash; never OPENAI_MODEL
+agents: 4
+rounds: 2
+topology: fully_connected
+seed: 42
+max_output_tokens: 512
+temperature: null
+timeout: 60
+max_retries: 0  # Gemini always uses one SDK attempt (no automatic retries).
+gemini_thinking_budget: 0
+# Set true only after confirming Free tier AND billing disabled for this project.
+gemini_free_tier_confirmed: false
+# Copy the model's current project limits from AI Studio; these are not guessed.
+gemini_rate_limits: {rpm: null, tpm: null, rpd: null}
+allow_self_loops: false
+sparse_edges: [[0, 1], [1, 2], [2, 3]]
+heuristic_threshold: 0.35
+heuristic_disagreement_weight: 0.6
+heuristic_consensus_weight: 0.2
+heuristic_novelty_weight: 0.2
+mlp_threshold: 0.5
+top_k: null
+mlp_checkpoint: null
+benchmark: demo
+split: validation
+limit: 40
+validation_fraction: 0.2
+dataset_revision: main
+output: results/gemini_baseline.jsonl
