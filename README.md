@@ -255,7 +255,7 @@ Historical artifacts bound by SHA-256 records retain their exact bytes, paths an
 
 The paired-label and fitting code provides a starting point, not a completed data-collection study. Edge utility depends on the surrounding graph and other agents' behavior; interacting edges complicate attribution. A checkpoint's provenance flag is a software guard, not evidence of scientific validity.
 
-## Limitations
+## Current Challenges & Future Directions
 
 - **Small, preliminary samples:** ten GSM8K questions per topology and sixteen completed AQUA-RAT questions do not establish general performance or statistical superiority.
 - **Initial ceiling effect:** GSM8K votes were correct before communication, leaving no observed accuracy errors for later rounds to correct.
