@@ -13,7 +13,7 @@ from src.controllers.heuristic import HeuristicController
 from src.controllers.mlp import EdgeMLP, MLPController
 from src.evaluation import extract_answer, majority_vote, exact_match
 from src.features import FEATURE_NAMES, FeatureExtractor
-from src.llm_client import Completion, DEMO_QUESTION, MockLLM, OpenAILLM
+from src.llm_client import Completion, DEMO_QUESTION, MockLLM
 from src.runner import run_question
 from src.topology import make_topology, validate_graph
 from src.training import EdgeTrainingExample, collect_paired_example, train_controller
@@ -143,7 +143,7 @@ def test_vote_and_evaluation():
 
 @pytest.mark.parametrize('topology,edges', [('fully_connected', 12), ('ring', 4), ('empty', 0), ('static_sparse', 1)])
 def test_offline_execution(topology, edges, monkeypatch):
-    monkeypatch.delenv('OPENAI_API_KEY', raising=False)
+    monkeypatch.delenv('GEMINI_API_KEY', raising=False)
     result = run_question(DEMO_QUESTION, MockLLM(), topology=topology, sparse_edges=((0, 1),))
     assert result['simulated'] and result['prediction'] == '6'
     assert result['trace'][1]['active_edges'] == edges
@@ -151,12 +151,6 @@ def test_offline_execution(topology, edges, monkeypatch):
     assert result['latency'] >= 0
     with pytest.raises(ValueError, match='only the apple'):
         MockLLM().generate('unknown problem')
-
-
-def test_api_configuration(monkeypatch):
-    monkeypatch.delenv('OPENAI_API_KEY', raising=False)
-    with pytest.raises(ValueError, match='OPENAI_API_KEY'):
-        OpenAILLM('configured-model')
 
 
 def test_partition_disjoint_and_stable():
@@ -227,28 +221,6 @@ def test_gsm8k_loader_with_local_fixture(monkeypatch):
     assert all(x.item_id.startswith('gsm8k:test:') for x in test)
     assert all(x[-1] == 'pinned-test-revision' for x in calls)
     assert benchmark.evaluate(extract_answer(train[0].reference), train[0].reference)
-
-
-def test_openai_adapter_with_sdk_fixture(monkeypatch):
-    import types
-    import openai
-    calls = []
-    options = []
-    def create(**kwargs):
-        calls.append(kwargs)
-        return types.SimpleNamespace(status='completed', output_text='#### 6',
-                                     usage=types.SimpleNamespace(input_tokens=12, output_tokens=4))
-    def client(**kwargs):
-        options.append(kwargs)
-        return types.SimpleNamespace(responses=types.SimpleNamespace(create=create))
-    monkeypatch.setenv('OPENAI_API_KEY', 'unit-test-not-a-real-key')
-    monkeypatch.setattr(openai, 'OpenAI', client)
-    backend = OpenAILLM('configured-model', max_output_tokens=64, max_retries=2)
-    result = backend.generate('Question only')
-    assert result.input_tokens == 12 and result.output_tokens == 4
-    assert calls[0] == {'model': 'configured-model', 'input': 'Question only',
-                        'store': False, 'max_output_tokens': 64}
-    assert options[0]['max_retries'] == 2
 
 
 def test_invalid_controller_graph_rejected():

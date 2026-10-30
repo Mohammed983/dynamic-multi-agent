@@ -253,8 +253,10 @@ def test_cli_selects_gemini_defaults_and_logs_raw_usage(sdk, tmp_path, monkeypat
     output = tmp_path / 'run.jsonl'
     monkeypatch.setattr(run_baseline, 'load_dotenv', lambda *args: None)
     monkeypatch.setattr(run_baseline, 'dotenv_values', lambda *args: {})
-    monkeypatch.setenv('OPENAI_MODEL', 'must-not-leak-into-gemini-selection')
-    monkeypatch.delenv('GEMINI_MODEL', raising=False)
+    if config.get('model'):
+        monkeypatch.setenv('GEMINI_MODEL', 'must-not-override-the-explicit-config-model')
+    else:
+        monkeypatch.delenv('GEMINI_MODEL', raising=False)
     monkeypatch.setattr(sys, 'argv', ['test', '--config', str(path), '--output', str(output)])
     run_baseline.main()
     capsys.readouterr()

@@ -58,7 +58,7 @@ Answer support is a consensus-based confidence **proxy**, not calibrated model c
 |---|---|
 | Synchronized multi-round reasoning and directed message routing | Implemented, covered by offline tests, and exercised in the real GSM8K pilot |
 | Fixed graphs and heuristic dynamic selection | Implemented and tested; no reported real-LLM heuristic performance study |
-| Modular LLM backend | OpenAI Responses and official Google Gen AI adapters; Gemini used in the recorded experiments |
+| Modular LLM backend | Provider-neutral interface with the official Google Gen AI adapter and an offline mock; Gemini used in the recorded experiments |
 | Offline mock backend | Deterministic apple-problem fixture for routing tests; not a benchmark reasoning model |
 | Configurable agent roles | Step-by-step solver, alternative solver, critical reasoner and independent verifier; opt-in, with fixed role order |
 | GSM8K and AQUA-RAT | Dataset loading, provenance, split separation and benchmark-specific evaluation |
@@ -120,7 +120,7 @@ Sources: [AQUA-RAT midterm report](results/aqua_v2_midterm.md) · [machine-reada
 
 ### Environment setup
 
-Use **Python 3.11+**. Dependencies are specified in [requirements.txt](requirements.txt): OpenAI and Google Gen AI SDKs, NetworkX, PyTorch, Hugging Face Datasets, NumPy, pandas, scikit-learn, python-dotenv, PyYAML, pytest and tiktoken. Version ranges are provided rather than an exact dependency lock.
+Use **Python 3.11+**. Dependencies are specified in [requirements.txt](requirements.txt): the Google Gen AI SDK, NetworkX, PyTorch, Hugging Face Datasets, NumPy, pandas, scikit-learn, python-dotenv, PyYAML and pytest. Version ranges are provided rather than an exact dependency lock. Supported backends are `gemini` for real inference and `mock` for offline routing tests.
 
 From the repository root in Windows PowerShell:
 
@@ -158,16 +158,14 @@ Offline coverage includes graph validation, routing, synchronized rounds, edge c
 
 ### API configuration
 
-Create a local `.env` from [.env.example](.env.example) without replacing an existing file, then populate only the credentials needed for your backend:
+Create a local `.env` from [.env.example](.env.example) without replacing an existing file, then supply your Gemini API key:
 
 ```dotenv
-OPENAI_API_KEY=
-OPENAI_MODEL=
 GEMINI_API_KEY=
 GEMINI_MODEL=gemini-3.5-flash-lite
 ```
 
-OpenAI needs a model available to your account via `OPENAI_MODEL` or configuration. For Gemini, the model in YAML takes precedence over the environment default. Never put real credentials in YAML, result files or version control. `.env` is ignored by [.gitignore](.gitignore).
+`GEMINI_API_KEY` is required only for real inference; offline tests and mock demos need no key. `GEMINI_MODEL` supplies a default when YAML does not specify a model. The experiment YAML takes precedence, including the explicit `gemini-3.5-flash-lite` configuration. Never put real credentials in YAML, result files or version control. `.env` remains ignored by [.gitignore](.gitignore).
 
 | Configuration | Purpose |
 |---|---|
@@ -209,7 +207,7 @@ For an 80-request diagnostic, at least **100 remaining daily requests** are requ
 
 The archived v2 prefix already contains attempts. The runner intentionally refuses re-execution, overwrites and automatic replay. Do not delete existing logs to bypass these guards. Source, configuration, roles and data hashes are checked before live execution. Truncation, quota/authentication errors and unknown usage halt the diagnostic without mock substitution.
 
-The lower-level `run_baseline` CLI does **not** enforce approval receipts; do not treat it as the guarded research-run interface. The dedicated OpenAI pilot has separate budget-approval tooling in [real_pilot.py](experiments/real_pilot.py). No live API command is part of the offline quick start.
+The lower-level `run_baseline` CLI supports `--backend gemini` and `--backend mock` but does **not** enforce approval receipts; use the dedicated Gemini experiment runners for guarded research runs. No live API command is part of the offline quick start. Provider cleanup changes source fingerprints, so historical approvals cannot authorize the changed code: prepare a new reviewed plan for any future live run rather than updating old hashes.
 
 ## Repository structure
 
@@ -224,7 +222,7 @@ dynamic-multi-agent/
 │   ├── runner.py               # Synchronized multi-round execution
 │   ├── topology.py             # Directed graph construction and validation
 │   ├── communication.py        # Previous-round message routing
-│   ├── llm_client.py           # Backend protocol, OpenAI adapter and mock fixture
+│   ├── llm_client.py           # Provider-neutral backend protocol and mock fixture
 │   ├── gemini_client.py        # Gemini adapter, usage accounting and pacing
 │   ├── features.py             # Candidate-edge features and availability masks
 │   ├── controllers/            # Heuristic and MLP selection interfaces
@@ -234,7 +232,7 @@ dynamic-multi-agent/
 │   ├── difficulty.py           # Question-only complexity selection
 │   ├── diagnostics.py          # Independent-agent agreement and error metrics
 │   ├── training.py             # Offline paired labels and supervised fitting
-│   └── pilot.py                # Shared pilot metering and logging helpers
+│   └── pilot.py                # Durable JSONL logging shared by Gemini runners
 ├── experiments/                # Baseline/dynamic CLIs, guarded pilots, diagnostics,
 │                               # recovery tools and offline analysis
 ├── tests/                      # Offline unit and regression tests
@@ -246,7 +244,7 @@ Dataset caches are local; the frozen GSM8K input `data/pilot_questions.jsonl` is
 
 Use `gemini_10_question_pilot_final.jsonl` for the canonical 20 GSM8K question/topology outcomes. The original `gemini_10_question_pilot.jsonl` retains 37 historical snapshots/revisions and must not be averaged as 37 independent trials. Original AQUA-RAT v1 and v2 outcomes are retained separately, including incomplete/not-run statuses.
 
-Historical artifacts bound by SHA-256 records retain their exact local bytes and paths. See the [cleanup and retention plan](docs/cleanup_plan.md) before deleting or relocating them, the [offline verification record](docs/cleanup_verification.md) for the cleanup checks, and the [staging review](docs/staging_review.md) for the subsequent public-file inventory. Keep credentials and access receipts private; review metadata before publishing additional artifacts.
+Historical artifacts bound by SHA-256 records retain their exact bytes, paths and recorded provider metadata. The `openai/gsm8k` identifier is a Hugging Face dataset namespace, not an inference backend; it requires neither an OpenAI key nor the OpenAI SDK. Historical `real_pilot_plan.json` and `real_pilot_references.jsonl` files remain because the Gemini pilot uses their frozen dataset provenance and labels. The legacy OpenAI client and paid-run CLI have been removed. Keep credentials and access receipts private; review metadata before publishing additional artifacts.
 
 ## Research roadmap
 

@@ -136,9 +136,17 @@ def test_reference_changes_do_not_change_prompts_or_controller_inputs(tmp_path, 
     from src.topology import make_topology
     prompts, feature_inputs = [], []
     class Backend:
-        model, simulated = 'audit-fixture', True
+        model, simulated = 'audit-fixture', False
+        def __init__(self):
+            self.usage_records = []
+        def validate_free_access(self):
+            pass  # Local fixture only; never constructs an SDK client.
+        def close(self):
+            pass
         def generate(self, prompt):
             prompts.append(prompt)
+            self.usage_records.append({'prompt_token_count': 10, 'candidates_token_count': 3,
+                                       'thoughts_token_count': 0, 'total_token_count': 13})
             return Completion('#### 6', 10, 3, 0.)
     class Controller:
         def __init__(self, *args):
@@ -147,13 +155,15 @@ def test_reference_changes_do_not_change_prompts_or_controller_inputs(tmp_path, 
             feature_inputs.append(features.values.copy())
             return make_topology('ring', count)
     monkeypatch.setattr(run_baseline, 'load_dotenv', lambda *args: None)
-    monkeypatch.setattr(run_baseline, 'OpenAILLM', lambda *args: Backend())
+    monkeypatch.setattr(run_baseline, 'dotenv_values', lambda *args: {})
+    import src.gemini_client as gemini
+    monkeypatch.setattr(gemini, 'GeminiLLM', lambda *args, **kwargs: Backend())
     monkeypatch.setattr(run_baseline, 'HeuristicController', Controller)
     items = [BenchmarkItem('q1', 'A question without the reference', '#### 987654321', 'validation'),
              BenchmarkItem('q2', 'A question without the reference', '#### -123456789', 'validation')]
     monkeypatch.setattr(run_baseline.GSM8K, 'load', lambda *args: items)
     output = tmp_path / 'audit_records.jsonl'
-    monkeypatch.setattr(sys, 'argv', ['audit', '--backend', 'openai', '--benchmark', 'gsm8k',
+    monkeypatch.setattr(sys, 'argv', ['audit', '--backend', 'gemini', '--benchmark', 'gsm8k',
                                    '--topology', 'heuristic', '--output', str(output)])
     run_baseline.main()
     capsys.readouterr()

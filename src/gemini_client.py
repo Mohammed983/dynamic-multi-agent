@@ -1,6 +1,6 @@
 """Official Google Gen AI backend for text-only, confirmed-free-tier use.
 
-This implements the existing LLMBackend protocol without changing OpenAILLM.
+Implements the shared LLMBackend protocol used by the runner and mock backend.
 No billing APIs, Vertex AI, tools, fallback model or automatic retries are used.
 """
 from collections import deque

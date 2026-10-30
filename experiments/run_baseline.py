@@ -15,7 +15,7 @@ from dotenv import dotenv_values, load_dotenv
 from src.benchmarks import BenchmarkItem, GSM8K, AQUARAT
 from src.controllers.heuristic import HeuristicController
 from src.evaluation import exact_match
-from src.llm_client import DEMO_QUESTION, MockLLM, OpenAILLM
+from src.llm_client import DEMO_QUESTION, MockLLM
 from src.runner import run_question
 from src.roles import load_roles
 
@@ -25,7 +25,7 @@ ROOT = Path(__file__).resolve().parents[1]
 def main(default_topology: str | None = None) -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--config', type=Path)
-    parser.add_argument('--backend', choices=['mock', 'openai', 'gemini'])
+    parser.add_argument('--backend', choices=['mock', 'gemini'])
     parser.add_argument('--model')
     parser.add_argument('--topology', choices=['fully_connected', 'ring', 'empty', 'static_sparse', 'heuristic', 'mlp'])
     parser.add_argument('--benchmark', choices=['demo', 'gsm8k', 'aqua_rat'])
@@ -44,6 +44,8 @@ def main(default_topology: str | None = None) -> None:
     for key in ('backend', 'model', 'topology', 'benchmark', 'split', 'limit', 'rounds', 'agents'):
         if getattr(args, key) is not None:
             config[key] = getattr(args, key)
+    if config['backend'] not in {'mock', 'gemini'}:
+        parser.error('Unknown backend; choose mock or gemini.')
     load_dotenv(ROOT / '.env')
     if config['backend'] == 'gemini':
         local = dotenv_values(ROOT / '.env')
@@ -51,7 +53,7 @@ def main(default_topology: str | None = None) -> None:
             os.environ['GEMINI_API_KEY'] = local['GEMINI_API_KEY']
         config['model'] = config.get('model') or local.get('GEMINI_MODEL') or os.getenv('GEMINI_MODEL') or 'gemini-2.5-flash'
     else:
-        config['model'] = config.get('model') or os.getenv('OPENAI_MODEL') or None
+        config['model'] = config.get('model') or None
     random.seed(config['seed'])
     np.random.seed(config['seed'])
     roles_path = args.roles_config or config.get('roles_config')
@@ -78,11 +80,6 @@ def main(default_topology: str | None = None) -> None:
             raise
     elif config['backend'] == 'mock':
         backend = MockLLM()
-    elif config['backend'] == 'openai':
-        backend = OpenAILLM(config['model'], config['max_output_tokens'], config['temperature'],
-                            config['timeout'], config['max_retries'])
-    else:
-        parser.error('Unknown backend; choose mock, openai or gemini.')
     controller = None
     topology = config['topology']
     if topology == 'heuristic':
@@ -110,7 +107,7 @@ def main(default_topology: str | None = None) -> None:
     config['output'] = str(output)
     output.parent.mkdir(parents=True, exist_ok=True)
     versions = {}
-    for package in ('openai', 'google-genai', 'networkx', 'torch', 'datasets', 'numpy', 'pandas', 'scikit-learn'):
+    for package in ('google-genai', 'networkx', 'torch', 'datasets', 'numpy', 'pandas', 'scikit-learn'):
         try:
             versions[package] = importlib.metadata.version(package)
         except importlib.metadata.PackageNotFoundError:
